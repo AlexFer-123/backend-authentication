@@ -1,0 +1,1 @@
+Is just a node application to make more easier stater project made with Cursor IDE.
