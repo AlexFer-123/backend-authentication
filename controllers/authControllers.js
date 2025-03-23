@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 exports.signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    console.log(username, email, password);
     const newUser = await User.create({ username, email, password });
 
-    // Gerar token JWT
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: '1h'
     });
@@ -23,15 +23,12 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Verificar e-mail
     const user = await User.findOne({ email }).select('+password');
     if (!user) throw new Error('Credenciais inválidas');
 
-    // Verificar senha
     const isMatch = await user.comparePassword(password);
     if (!isMatch) throw new Error('Credenciais inválidas');
 
-    // Gerar token JWT
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1h'
     });
