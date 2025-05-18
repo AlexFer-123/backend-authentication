@@ -1,1 +1,1 @@
-Is just a node application to make more easier stater project made with Cursor IDE.
+Is just a node application valid user session.
